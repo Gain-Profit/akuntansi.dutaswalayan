@@ -59,6 +59,6 @@ class KelasesTableSeeder extends Seeder
           ]
         ];
         
-        DB::table('kelases')->insert($isi);
+        DB::table('kelas')->insert($isi);
     }
 }
