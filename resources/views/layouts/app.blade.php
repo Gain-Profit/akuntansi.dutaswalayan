@@ -42,7 +42,37 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;
+                    @if (!Auth::guest())
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Akun <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Daftar Akun</a></li>
+                            <li><a href="#">Saldo Awal Akun</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Daftar Asset</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jurnal <span
+                                    class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Jurnal Umum</a></li>
+                            <li><a href="#">Daftar Jurnal Umum</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Laporan <span
+                                    class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Trial Balance</a></li>
+                            <li><a href="#">Neraca</a></li>
+                            <li><a href="#">Laba/ Rugi</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Buku Besar</a></li>
+                            <li><a href="#">Transaksi Jurnal</a></li>
+                        </ul>
+                    </li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->
