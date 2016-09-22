@@ -18,9 +18,9 @@ class CreateJurnalSejarahsTable extends Migration
             $table->integer('kiraan_id')->unsigned();
             $table->tinyInteger('bulan')->unsigned();
             $table->smallInteger('tahun')->unsigned();
-            $table->bigInteger('saldo_awal')->unsigned()->default(0);
-            $table->bigInteger('debit')->unsigned()->default(0);
-            $table->bigInteger('kredit')->unsigned()->default(0);
+            $table->bigInteger('saldo_awal')->default(0);
+            $table->bigInteger('debit')->default(0);
+            $table->bigInteger('kredit')->default(0);
             $table->timestamps();
             $table->primary(['perusahaan_id','kiraan_id','bulan','tahun']);
         });
