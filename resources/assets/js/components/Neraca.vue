@@ -2,11 +2,29 @@
     <div class="container">
         <div class="panel panel-default">
         <div class="panel-heading">
-            <h2>Neraca {{ perusahaans }}
-            </h2>
+            <h2>Neraca {{ perusahaans }}</h2>
+            Periode : 
+            <div class="btn-group" role="group" aria-label="...">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ bulan }}
+                    <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li v-for="n in 12"><a @click="ubahBulan(n+1)">{{ n+1 }}</a></li>
+                    </ul>
+                </div>
 
-            <h3>{{ periode }}
-            </h3>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ tahun }}
+                    <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li v-for="n in 5"><a @click="ubahTahun(n + tahunSekarang - 4)">{{ n + tahunSekarang - 4 }}</a></li>
+                    </ul>
+                </div>
+            </div>            
         </div>
 
         <div class="panel-body">
@@ -21,7 +39,7 @@
                         <h4>Aktiva</h4>
                     </div>
                     <div class="col-md-6">
-                        <h4 class="text-right">{{ sumAktiva | currencyDisplay }}</h4>
+                        <h4 class="text-right"><strong>{{ sumAktiva | currencyDisplay }}</strong></h4>                        
                     </div>
                     <table class="table table-striped">
                         <thead>
@@ -50,7 +68,7 @@
                         <h4>Pasiva</h4>
                     </div>
                     <div class="col-md-6">
-                        <h4 class="text-right">{{ sumPasiva | currencyDisplay}}</h4>
+                        <h4 class="text-right"><strong>{{ sumPasiva | currencyDisplay}}</strong></h4>                        
                     </div>
                     <table class="table table-striped">
                         <thead>
@@ -89,7 +107,9 @@
                 sumAktiva : 0,
                 sumPasiva : 0,
                 perusahaans :'BR001',
-                periode : '201608',
+                tahun : new Date().getFullYear(),
+                bulan : new Date().getMonth() + 1,
+                tahunSekarang : new Date().getFullYear(),                
             }
         },
         ready() {
@@ -97,7 +117,7 @@
         },
         methods: {
             getNeracas() {
-                this.$http.get('/neraca/' + this.perusahaans + '/' + this.periode)
+                this.$http.get('/api/neraca/' + this.perusahaans + '/' + this.tahun + this.bulan )
                         .then(response => {                            
                             this.neracas = response.data;
                             this.splitNeracas();
@@ -108,17 +128,25 @@
                 this.neracaKredits = _.filter(this.neracas,{'gol':'CR'});
                 this.sumAktiva = _.sumBy(this.neracaDebits, 'saldo_akhir');
                 this.sumPasiva = _.sumBy(this.neracaKredits, 'saldo_akhir');
-            }
+            },
+            ubahBulan($bulan) {
+                this.bulan = $bulan;
+                this.getNeracas();
+            },
+            ubahTahun($tahun) {
+                this.tahun = $tahun;
+                this.getNeracas();
+            },            
         },
         filters: {
             currencyDisplay: {
                 read: function(val) {
-                    return val.toLocaleString();
-                },
-                write: function(val, oldVal) {
-                    var number = +val.replace(/[^\d.]/g, '')
-                    return isNaN(number) ? 0 : parseFloat(number.toFixed(2))
-                }
+                    var hasil = Math.abs(val).toLocaleString();
+                    if (val < 0) {
+                        hasil = '(' + hasil + ')';
+                    }
+                    return hasil;
+                },                
             }
         }        
     }
