@@ -18,7 +18,7 @@ class SejarahController extends Controller
     public function getNeraca($comp, $period)
     {
         $tahun = substr($period, 0, 4);
-        $bulan = substr($period, 5);
+        $bulan = substr($period, 4);
 
         $hasil = DB::select(
         'SELECT jh.perusahaan_id, jh.kiraan_id, kr.nama AS nama_kiraan, sk.nama AS nama_kelas_sub, kl.nama AS nama_kelas, kl.gol, 
@@ -37,7 +37,7 @@ class SejarahController extends Controller
     public function getLaba($comp, $period)
     {
         $tahun = substr($period, 0, 4);
-        $bulan = substr($period, 5);
+        $bulan = substr($period, 4);
 
         $hasil = DB::select('SELECT jh.perusahaan_id, jh.kiraan_id, kr.nama AS nama_kiraan, sk.nama AS nama_kelas_sub, 
         kl.nama AS nama_kelas, kl.gol, IF(kl.gol = "DB",(jh.debit - jh.kredit),-(jh.debit - jh.kredit)) AS saldo_akhir 
