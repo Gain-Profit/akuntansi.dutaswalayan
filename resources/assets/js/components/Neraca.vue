@@ -2,29 +2,49 @@
     <div class="container">
         <div class="panel panel-default">
         <div class="panel-heading">
-            <h2>Neraca {{ perusahaans }}</h2>
-            Periode : 
-            <div class="btn-group" role="group" aria-label="...">
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ bulan }}
-                    <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li v-for="n in 12"><a @click="ubahBulan(n+1)">{{ n+1 }}</a></li>
-                    </ul>
+            <h2 class="text-center">Neraca</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    Unit : 
+                    <div class="btn-group" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ perusahaan.nama }}
+                            <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li v-for="unit in perusahaans"><a @click="ubahPerusahaan(unit.kode)">{{ unit.nama }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ tahun }}
-                    <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li v-for="n in 5"><a @click="ubahTahun(n + tahunSekarang - 4)">{{ n + tahunSekarang - 4 }}</a></li>
-                    </ul>
+                <div class="col-md-6">
+                    Periode : 
+                    <div class="btn-group" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ bulan }}
+                            <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li v-for="n in 12"><a @click="ubahBulan(n+1)">{{ n+1 }}</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ tahun }}
+                            <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li v-for="n in 5"><a @click="ubahTahun(n + tahunSekarang - 4)">{{ n + tahunSekarang - 4 }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>            
+            </div>
+                                
         </div>
 
         <div class="panel-body">
@@ -47,7 +67,7 @@
                             <th>#</th>
                             <th>kode</th>
                             <th>Nama Akun</th>
-                            <th>Saldo</th>
+                            <th class="text-right">Saldo</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -76,7 +96,7 @@
                             <th>#</th>
                             <th>kode</th>
                             <th>Nama Akun</th>
-                            <th>Saldo</th>
+                            <th class="text-right">Saldo</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -106,7 +126,11 @@
                 neracaKredits : [],
                 sumAktiva : 0,
                 sumPasiva : 0,
-                perusahaans :'BR001',
+                perusahaan : { kode: 'BR001', nama: 'DUTA SWALAYAN'},
+                perusahaans : [
+                    { kode: 'BR001', nama: 'DUTA SWALAYAN'},
+                    { kode: 'PS001', nama: 'DUTA GROSIR'}
+                ],
                 tahun : new Date().getFullYear(),
                 bulan : new Date().getMonth() + 1,
                 tahunSekarang : new Date().getFullYear(),                
@@ -117,17 +141,17 @@
         },
         methods: {
             getNeracas() {
-                this.$http.get('/neraca/' + this.perusahaans + '/' + this.tahun + this.bulan )
+                this.$http.get('/neraca/' + this.perusahaan.kode + '/' + this.tahun + this.bulan )
                         .then(response => {                            
                             this.neracas = response.data;
                             this.splitNeracas();
                         });
             },
             splitNeracas() {
-                this.neracaDebits = _.filter(this.neracas,{'gol':'DB'});
-                this.neracaKredits = _.filter(this.neracas,{'gol':'CR'});
-                this.sumAktiva = _.sumBy(this.neracaDebits, 'saldo_akhir');
-                this.sumPasiva = _.sumBy(this.neracaKredits, 'saldo_akhir');
+                this.neracaDebits  = _.filter(this.neracas,{ 'gol' : 'DB' });
+                this.neracaKredits = _.filter(this.neracas,{ 'gol' : 'CR' });
+                this.sumAktiva     = _.sumBy(this.neracaDebits, 'saldo_akhir');
+                this.sumPasiva     = _.sumBy(this.neracaKredits, 'saldo_akhir');
             },
             ubahBulan($bulan) {
                 if(this.bulan != $bulan) {
@@ -140,7 +164,13 @@
                     this.tahun = $tahun;
                     this.getNeracas();
                 }
-            },            
+            },
+            ubahPerusahaan($kode) {
+                if(this.perusahaan.kode != $kode) {
+                    this.perusahaan = _.find(this.perusahaans, { 'kode' : $kode });
+                    this.getNeracas();
+                }
+            }            
         },
         filters: {
             currencyDisplay: {
