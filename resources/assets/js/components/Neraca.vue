@@ -30,7 +30,7 @@
         <div class="panel-body">
 
                 <div v-if="neracas.length === 0">
-                    <div class="alert alert-warning"><strong>Maaf</strong> daftar Perkiraan tidak ditemukan</div>
+                    <div class="alert alert-warning"><strong>Maaf</strong> Neraca pada Periode ini tidak di temukan</div>
                 </div>
             
             <div class="row">
@@ -130,12 +130,16 @@
                 this.sumPasiva = _.sumBy(this.neracaKredits, 'saldo_akhir');
             },
             ubahBulan($bulan) {
-                this.bulan = $bulan;
-                this.getNeracas();
+                if(this.bulan != $bulan) {
+                    this.bulan = $bulan;
+                    this.getNeracas();
+                }
             },
             ubahTahun($tahun) {
-                this.tahun = $tahun;
-                this.getNeracas();
+                if(this.tahun != $tahun) {
+                    this.tahun = $tahun;
+                    this.getNeracas();
+                }
             },            
         },
         filters: {
