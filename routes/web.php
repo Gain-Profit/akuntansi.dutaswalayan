@@ -19,9 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/neraca', function () {
-    return App\Models\JurnalSejarah::all();
-});
+Route::get('/neraca', 'LaporanController@neraca');
 
 Route::get('/awal/{comp}/{period}', 'SejarahController@getSaldoAwal');
 
