@@ -59,7 +59,7 @@ class SejarahController extends Controller
 
         $hasil = DB::select(
             'SELECT jh.perusahaan_id, jh.kiraan_id, kr.nama AS nama_kiraan, sk.nama AS nama_kelas_sub, 
-            kl.nama AS nama_kelas, kl.gol, IF(kl.gol = "DB",(jh.debit - jh.kredit),-(jh.debit - jh.kredit)) AS saldo_akhir 
+            kl.nama AS nama_kelas, kl.gol, -(jh.debit - jh.kredit) AS saldo_akhir 
             FROM jurnal_sejarahs jh 
             INNER JOIN kiraans kr ON (jh.kiraan_id = kr.id AND jh.perusahaan_id = kr.perusahaan_id) 
             INNER JOIN kelas_subs sk ON kr.kelas_sub_id = sk.id 
