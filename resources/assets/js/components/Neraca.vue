@@ -126,12 +126,8 @@
             splitNeracas() {
                 this.neracaDebits = _.filter(this.neracas,{'gol':'DB'});
                 this.neracaKredits = _.filter(this.neracas,{'gol':'CR'});
-                this.sumAktiva = _.sumBy(this.neracaDebits, function(o) {
-                    return parseInt(o.saldo_akhir);
-                });
-                this.sumPasiva = _.sumBy(this.neracaKredits, function(o) {
-                    return parseInt(o.saldo_akhir);
-                });
+                this.sumAktiva = _.sumBy(this.neracaDebits, 'saldo_akhir');
+                this.sumPasiva = _.sumBy(this.neracaKredits, 'saldo_akhir');
             },
             ubahBulan($bulan) {
                 this.bulan = $bulan;
