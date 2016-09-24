@@ -34,7 +34,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/home') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
             </div>
@@ -65,8 +65,8 @@
                                     class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">Trial Balance</a></li>
-                            <li><a href="#">Neraca</a></li>
-                            <li><a href="#">Laba/ Rugi</a></li>
+                            <li><a href="{{ url('/neraca') }}">Neraca</a></li>
+                            <li><a href="{{ url('/laba') }}">Laba/ Rugi</a></li>
                             <li class="divider"></li>
                             <li><a href="#">Buku Besar</a></li>
                             <li><a href="#">Transaksi Jurnal</a></li>
