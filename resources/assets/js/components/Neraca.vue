@@ -64,16 +64,12 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th>kode</th>
                             <th>Nama Akun</th>
                             <th class="text-right">Saldo</th>
                         </tr>
                         </thead>
                         <tbody>
                             <tr v-for="neraca in neracaDebits">
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ neraca.kiraan_id }}</td>
                                 <td>{{ neraca.nama_kiraan }}</td>
                                 <td class="text-right">
                                     <strong>{{ neraca.saldo_akhir | currencyDisplay}}</strong>
@@ -93,16 +89,12 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th>kode</th>
                             <th>Nama Akun</th>
                             <th class="text-right">Saldo</th>
                         </tr>
                         </thead>
                         <tbody>
                             <tr v-for="neraca in neracaKredits">
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ neraca.kiraan_id }}</td>
                                 <td>{{ neraca.nama_kiraan }}</td>
                                 <td class="text-right">
                                     <strong>{{ neraca.saldo_akhir | currencyDisplay}}</strong>
@@ -148,6 +140,9 @@
                         });
             },
             splitNeracas() {
+                this.neracas  = _.filter(this.neracas, function(v){
+                    return v.saldo_akhir != 0;
+                });
                 this.neracaDebits  = _.filter(this.neracas,{ 'gol' : 'DB' });
                 this.neracaKredits = _.filter(this.neracas,{ 'gol' : 'CR' });
                 this.sumAktiva     = _.sumBy(this.neracaDebits, 'saldo_akhir');
