@@ -21,6 +21,9 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/neraca', 'LaporanController@neraca');
 
+Route::get('/laba', 'LaporanController@laba');
+
+
 Route::group(['prefix' => 'api'], function () {
     Route::get('/awal/{comp}/{period}', 'SejarahController@getSaldoAwal');
 

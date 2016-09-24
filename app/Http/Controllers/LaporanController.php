@@ -17,4 +17,9 @@ class LaporanController extends Controller
     {
         return view('laporan.neraca');
     }
+
+    public function laba()
+    {
+        return view('laporan.laba');
+    }
 }
