@@ -141,7 +141,7 @@
         },
         methods: {
             getNeracas() {
-                this.$http.get('/neraca/' + this.perusahaan.kode + '/' + this.tahun + this.bulan )
+                this.$http.get('/api/neraca/' + this.perusahaan.kode + '/' + this.tahun + this.bulan )
                         .then(response => {                            
                             this.neracas = response.data;
                             this.splitNeracas();
