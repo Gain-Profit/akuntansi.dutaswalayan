@@ -4,7 +4,7 @@
         <div class="panel-heading">
             <h2 class="text-center">Neraca</h2>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-xs-6">
                     Unit : 
                     <div class="btn-group" role="group" aria-label="...">
                         <div class="btn-group" role="group">
@@ -19,7 +19,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-xs-6 text-right">
                     Periode : 
                     <div class="btn-group" role="group" aria-label="...">
                         <div class="btn-group" role="group">
@@ -55,11 +55,11 @@
             
             <div class="row">
                 <div class="col-md-6">
-                    <div class="col-md-6">
+                    <div class="col-xs-6">
                         <h4>Aktiva</h4>
                     </div>
-                    <div class="col-md-6">
-                        <h4 class="text-right"><strong>{{ sumAktiva | currencyDisplay }}</strong></h4>                        
+                    <div class="col-xs-6 text-right">
+                        <h4><strong>{{ sumAktiva | currencyDisplay }}</strong></h4>                        
                     </div>
                     <table class="table table-striped">
                         <thead>
@@ -84,11 +84,11 @@
                 </div>
 
                 <div class="col-md-6">
-                    <div class="col-md-6">
+                    <div class="col-xs-6">
                         <h4>Pasiva</h4>
                     </div>
-                    <div class="col-md-6">
-                        <h4 class="text-right"><strong>{{ sumPasiva | currencyDisplay}}</strong></h4>                        
+                    <div class="col-xs-6 text-right">
+                        <h4><strong>{{ sumPasiva | currencyDisplay}}</strong></h4>                        
                     </div>
                     <table class="table table-striped">
                         <thead>
