@@ -23,6 +23,8 @@ Route::get('/neraca', function () {
     return App\Models\JurnalSejarah::all();
 });
 
+Route::get('/awal/{comp}/{period}', 'SejarahController@getSaldoAwal');
+
 Route::get('/neraca/{comp}/{period}', 'SejarahController@getNeraca');
 
 Route::get('/laba/{comp}/{period}', 'SejarahController@getLaba');
