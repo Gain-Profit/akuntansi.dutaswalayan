@@ -31,4 +31,9 @@ class LaporanController extends Controller
     {
         return view('laporan.laba');
     }
+
+    public function balance()
+    {
+        return view('laporan.balance');
+    }
 }

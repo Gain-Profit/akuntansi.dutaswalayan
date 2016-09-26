@@ -17,12 +17,16 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/awal', 'LaporanController@awal');
 
+Route::get('/balance', 'LaporanController@balance');
+
 Route::get('/neraca', 'LaporanController@neraca');
 
 Route::get('/laba', 'LaporanController@laba');
 
 Route::group(['prefix' => 'api'], function () {
     Route::get('/awal/{comp}/{period}', 'SejarahController@getSaldoAwal');
+
+    Route::get('/balance/{comp}/{period}', 'SejarahController@getBalance');
 
     Route::get('/neraca/{comp}/{period}', 'SejarahController@getNeraca');
 

@@ -64,7 +64,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Laporan <span
                                     class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Trial Balance</a></li>
+                            <li><a href="{{ url('/balance') }}">Trial Balance</a></li>
                             <li><a href="{{ url('/neraca') }}">Neraca</a></li>
                             <li><a href="{{ url('/laba') }}">Laba/ Rugi</a></li>
                             <li class="divider"></li>
