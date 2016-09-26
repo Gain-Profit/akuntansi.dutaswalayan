@@ -31,4 +31,6 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('/neraca/{comp}/{period}', 'SejarahController@getNeraca');
 
     Route::get('/laba/{comp}/{period}', 'SejarahController@getLaba');
+
+    Route::get('/perusahaans', 'PerusahaanController@getPerusahaans');
 });
