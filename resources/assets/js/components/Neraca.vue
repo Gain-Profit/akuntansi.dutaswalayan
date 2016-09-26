@@ -13,7 +13,7 @@
                             <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li v-for="unit in perusahaans"><a @click="ubahPerusahaan(unit.kode)">{{ unit.nama }}</a></li>
+                                <li v-for="unit in perusahaans"><a @click="ubahPerusahaan(unit.id)">{{ unit.nama }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -118,23 +118,28 @@
                 neracaKredits : [],
                 sumAktiva : 0,
                 sumPasiva : 0,
-                perusahaan : { kode: 'BR001', nama: 'DUTA SWALAYAN'},
-                perusahaans : [
-                    { kode: 'BR001', nama: 'DUTA SWALAYAN'},
-                    { kode: 'PS001', nama: 'DUTA GROSIR'}
-                ],
+                perusahaan : {},
+                perusahaans : [],
                 tahun : new Date().getFullYear(),
                 bulan : new Date().getMonth() + 1,
                 tahunSekarang : new Date().getFullYear(),                
             }
         },
         ready() {
-            this.getNeracas();            
+            this.getPerusahaans();
         },
         props : ['jenis','label'],
         methods: {
+            getPerusahaans() {
+                this.$http.get('/api/perusahaans')
+                        .then(response => {                            
+                            this.perusahaans = response.data;
+                            this.perusahaan = _.head(this.perusahaans);
+                            this.getNeracas();            
+                        });
+            },
             getNeracas() {
-                this.$http.get('/api/' + this.jenis + '/' + this.perusahaan.kode + '/' + this.tahun + this.bulan )
+                this.$http.get('/api/' + this.jenis + '/' + this.perusahaan.id + '/' + this.tahun + this.bulan )
                         .then(response => {                            
                             this.neracas = response.data;
                             this.splitNeracas();
@@ -170,7 +175,7 @@
             },
             ubahPerusahaan($kode) {
                 if(this.perusahaan.kode != $kode) {
-                    this.perusahaan = _.find(this.perusahaans, { 'kode' : $kode });
+                    this.perusahaan = _.find(this.perusahaans, { 'id' : $kode });
                     this.getNeracas();
                 }
             }            

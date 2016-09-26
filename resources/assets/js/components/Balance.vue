@@ -13,7 +13,7 @@
                                 <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li v-for="unit in perusahaans"><a @click="ubahPerusahaan(unit.kode)">{{ unit.nama }}</a></li>
+                                    <li v-for="unit in perusahaans"><a @click="ubahPerusahaan(unit.id)">{{ unit.nama }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -94,22 +94,27 @@
                 balances : [],
                 totalDebit : 0,
                 totalKredit : 0,
-                perusahaan : { kode: 'BR001', nama: 'DUTA SWALAYAN'},
-                perusahaans : [
-                    { kode: 'BR001', nama: 'DUTA SWALAYAN'},
-                    { kode: 'PS001', nama: 'DUTA GROSIR'}
-                ],
+                perusahaan : {},
+                perusahaans : [],
                 tahun : new Date().getFullYear(),
                 bulan : new Date().getMonth() + 1,
                 tahunSekarang : new Date().getFullYear(),                
             }
         },
         ready() {
-            this.getbalances();            
+            this.getPerusahaans();
         },
         methods: {
-            getbalances() {
-                this.$http.get('/api/balance/' + this.perusahaan.kode + '/' + this.tahun + this.bulan )
+            getPerusahaans() {
+                this.$http.get('/api/perusahaans')
+                        .then(response => {                            
+                            this.perusahaans = response.data;
+                            this.perusahaan = _.head(this.perusahaans);
+                            this.getBalances();            
+                        });
+            },
+            getBalances() {
+                this.$http.get('/api/balance/' + this.perusahaan.id + '/' + this.tahun + this.bulan )
                         .then(response => {                            
                             this.balances = response.data;
                             this.hanyaBernilai();                            
@@ -125,19 +130,19 @@
             ubahBulan($bulan) {
                 if(this.bulan != $bulan) {
                     this.bulan = $bulan;
-                    this.getbalances();
+                    this.getBalances();
                 }
             },
             ubahTahun($tahun) {
                 if(this.tahun != $tahun) {
                     this.tahun = $tahun;
-                    this.getbalances();
+                    this.getBalances();
                 }
             },
             ubahPerusahaan($kode) {
                 if(this.perusahaan.kode != $kode) {
-                    this.perusahaan = _.find(this.perusahaans, { 'kode' : $kode });
-                    this.getbalances();
+                    this.perusahaan = _.find(this.perusahaans, { 'id' : $kode });
+                    this.getBalances();
                 }
             }            
         },
