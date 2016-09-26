@@ -51,7 +51,7 @@
                     <div class="alert alert-warning"><strong>Maaf</strong> Laba Rugi pada Periode ini tidak di temukan</div>
                 </div>
             
-                <table class="table table-striped">
+                <table v-else class="table table-striped">
                     <thead>
                         <tr>
                             <th>Nama Akun</th>

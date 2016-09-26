@@ -50,10 +50,10 @@
         <div class="panel-body">
 
                 <div v-if="neracas.length === 0">
-                    <div class="alert alert-warning"><strong>Maaf</strong> Neraca pada Periode ini tidak di temukan</div>
+                    <div class="alert alert-warning"><strong>Maaf</strong> {{ label }} pada Periode ini tidak di temukan</div>
                 </div>
             
-            <div class="row">
+            <div v-else class="row">
                 <div class="col-md-6">
                     <div class="col-xs-6">
                         <h4>Aktiva</h4>
