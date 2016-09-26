@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-<neraca></neraca>
+<neraca jenis="{{ $jenis }}" label="{{ $label }}"></neraca>
 @endsection

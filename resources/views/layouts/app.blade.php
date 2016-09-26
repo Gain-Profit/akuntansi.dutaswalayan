@@ -47,7 +47,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Akun <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">Daftar Akun</a></li>
-                            <li><a href="#">Saldo Awal Akun</a></li>
+                            <li><a href="{{ url('/awal') }}">Saldo Awal Akun</a></li>
                             <li class="divider"></li>
                             <li><a href="#">Daftar Asset</a></li>
                         </ul>

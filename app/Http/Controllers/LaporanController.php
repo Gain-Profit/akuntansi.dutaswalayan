@@ -13,9 +13,18 @@ class LaporanController extends Controller
         $this->middleware('auth');
     }
 
+    public function awal() 
+    {
+        return view('laporan.neraca')
+            ->with('jenis','awal')
+            ->with('label','Saldo Awal');
+    }
+    
     public function neraca() 
     {
-        return view('laporan.neraca');
+        return view('laporan.neraca')
+            ->with('jenis','neraca')
+            ->with('label','Neraca');
     }
 
     public function laba()

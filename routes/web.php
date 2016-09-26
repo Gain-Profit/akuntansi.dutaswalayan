@@ -15,10 +15,11 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index');
 
+Route::get('/awal', 'LaporanController@awal');
+
 Route::get('/neraca', 'LaporanController@neraca');
 
 Route::get('/laba', 'LaporanController@laba');
-
 
 Route::group(['prefix' => 'api'], function () {
     Route::get('/awal/{comp}/{period}', 'SejarahController@getSaldoAwal');

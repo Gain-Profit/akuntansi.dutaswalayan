@@ -2,7 +2,7 @@
     <div class="container">
         <div class="panel panel-default">
         <div class="panel-heading">
-            <h2 class="text-center">Neraca</h2>
+            <h2 class="text-center">{{ label }}</h2>
             <div class="row">
                 <div class="col-xs-6">
                     Unit : 
@@ -72,7 +72,7 @@
                             <tr v-for="neraca in neracaDebits">
                                 <td>{{ neraca.nama_kiraan }}</td>
                                 <td class="text-right">
-                                    <strong>{{ neraca.saldo_akhir | currencyDisplay}}</strong>
+                                    <strong>{{ neraca.saldo | currencyDisplay}}</strong>
                                 </td>
                             </tr>                            
                         </tbody>
@@ -97,7 +97,7 @@
                             <tr v-for="neraca in neracaKredits">
                                 <td>{{ neraca.nama_kiraan }}</td>
                                 <td class="text-right">
-                                    <strong>{{ neraca.saldo_akhir | currencyDisplay}}</strong>
+                                    <strong>{{ neraca.saldo | currencyDisplay}}</strong>
                                 </td>
                             </tr>                            
                         </tbody>
@@ -131,22 +131,28 @@
         ready() {
             this.getNeracas();            
         },
+        props : ['jenis','label'],
         methods: {
             getNeracas() {
-                this.$http.get('/api/neraca/' + this.perusahaan.kode + '/' + this.tahun + this.bulan )
+                this.$http.get('/api/' + this.jenis + '/' + this.perusahaan.kode + '/' + this.tahun + this.bulan )
                         .then(response => {                            
                             this.neracas = response.data;
                             this.splitNeracas();
                         });
             },
             splitNeracas() {
+                this.sumAktiva = this.sumPasiva = 0;
                 this.neracas  = _.filter(this.neracas, function(v){
-                    return v.saldo_akhir != 0;
+                    return v.saldo != 0;
                 });
                 this.neracaDebits  = _.filter(this.neracas,{ 'gol' : 'DB' });
                 this.neracaKredits = _.filter(this.neracas,{ 'gol' : 'CR' });
-                this.sumAktiva     = _.sumBy(this.neracaDebits, 'saldo_akhir');
-                this.sumPasiva     = _.sumBy(this.neracaKredits, 'saldo_akhir');
+                if (this.jenis == 'awal'){
+                    var aku = this.neracaKredits[_.findIndex(this.neracaKredits, {'kiraan_id' : 32999} )];
+                    aku.saldo = 0;                    
+                }
+                this.sumAktiva     = _.sumBy(this.neracaDebits, 'saldo');
+                this.sumPasiva     = _.sumBy(this.neracaKredits, 'saldo');
             },
             ubahBulan($bulan) {
                 if(this.bulan != $bulan) {
