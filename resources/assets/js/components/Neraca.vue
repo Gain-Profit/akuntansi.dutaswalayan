@@ -142,9 +142,11 @@
             },
             splitNeracas() {
                 this.sumAktiva = this.sumPasiva = 0;
-                this.neracas  = _.filter(this.neracas, function(v){
-                    return v.saldo != 0;
-                });
+                if (this.jenis == 'neraca'){
+                    this.neracas  = _.filter(this.neracas, function(v){
+                        return v.saldo != 0;
+                    });
+                }
                 this.neracaDebits  = _.filter(this.neracas,{ 'gol' : 'DB' });
                 this.neracaKredits = _.filter(this.neracas,{ 'gol' : 'CR' });
                 if (this.jenis == 'awal'){
