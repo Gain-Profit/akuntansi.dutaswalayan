@@ -1,6 +1,9 @@
 <template>
     <div class="container">
-        <div class="panel panel-default">
+        <div v-if="perusahaans.length === 0">
+            <div class="alert alert-warning text-center"><strong>Maaf Anda tidak terhubung dengan unit manapun</strong></div>
+        </div>
+        <div v-else class="panel panel-default">
             <div class="panel-heading">
                 <h2 class="text-center">Trial Balance</h2>
                 <div class="row">
@@ -91,11 +94,11 @@
     export default {
         data() {
             return {
-                balances : [],
+                balances : [0],
                 totalDebit : 0,
                 totalKredit : 0,
                 perusahaan : {},
-                perusahaans : [],
+                perusahaans : [0],
                 tahun : new Date().getFullYear(),
                 bulan : new Date().getMonth() + 1,
                 tahunSekarang : new Date().getFullYear(),                
@@ -109,8 +112,10 @@
                 this.$http.get('/api/perusahaans')
                         .then(response => {                            
                             this.perusahaans = response.data;
-                            this.perusahaan = _.head(this.perusahaans);
-                            this.getBalances();            
+                            if (this.perusahaans.length > 0){ 
+                                this.perusahaan = _.head(this.perusahaans);
+                                this.getBalances();                           
+                            }
                         });
             },
             getBalances() {
