@@ -46,7 +46,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Akun <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Daftar Akun</a></li>
+                            <li><a href="{{ url('/kiraan') }}">Daftar Akun</a></li>
                             <li><a href="{{ url('/awal') }}">Saldo Awal Akun</a></li>
                             <li class="divider"></li>
                             <li><a href="#">Daftar Asset</a></li>
@@ -57,7 +57,7 @@
                                     class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">Jurnal Umum</a></li>
-                            <li><a href="#">Daftar Jurnal Umum</a></li>
+                            <li><a href="#">Transaksi Jurnal</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -69,7 +69,6 @@
                             <li><a href="{{ url('/laba') }}">Laba/ Rugi</a></li>
                             <li class="divider"></li>
                             <li><a href="#">Buku Besar</a></li>
-                            <li><a href="#">Transaksi Jurnal</a></li>
                         </ul>
                     </li>
                     @endif

@@ -13,6 +13,8 @@ require('./bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
+Vue.component('kiraan', require('./components/Kiraan.vue'));
+
 Vue.component('balance', require('./components/Balance.vue'));
 
 Vue.component('neraca', require('./components/Neraca.vue'));
