@@ -36,4 +36,13 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\perusahaanUser');
     }
+
+    public function hasPerusahaan($id)
+    {
+        foreach ($this->perusahaanUser as $unit)
+        {
+            if ($unit->perusahaan_id == $id) return true;
+        }
+        return false;
+    }
 }

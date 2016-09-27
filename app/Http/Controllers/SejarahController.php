@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use DB;
-
 use App\Http\Requests;
+use Gate;
+use DB;
 
 class SejarahController extends Controller
 {
@@ -16,6 +15,10 @@ class SejarahController extends Controller
     }
 
     public function getSaldoAwal($comp, $period) {
+        if (Gate::denies('show-unit', $comp)) {
+            abort(404);
+        }
+
         $tahun = substr($period, 0, 4);
         $bulan = substr($period, 4);
 
@@ -35,6 +38,10 @@ class SejarahController extends Controller
 
     public function getBalance($comp, $period)
     {
+        if (Gate::denies('show-unit', $comp)) {
+            abort(404);
+        }
+
         $tahun = substr($period, 0, 4);
         $bulan = substr($period, 4);
 
@@ -51,6 +58,10 @@ class SejarahController extends Controller
     
     public function getNeraca($comp, $period)
     {
+        if (Gate::denies('show-unit', $comp)) {
+            abort(404);
+        }
+
         $tahun = substr($period, 0, 4);
         $bulan = substr($period, 4);
 
@@ -70,6 +81,10 @@ class SejarahController extends Controller
 
     public function getLaba($comp, $period)
     {
+        if (Gate::denies('show-unit', $comp)) {
+            abort(404);
+        }
+
         $tahun = substr($period, 0, 4);
         $bulan = substr($period, 4);
 

@@ -25,6 +25,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('show-unit', function ($user, $perusahaan_id) {
+            return $user->hasPerusahaan($perusahaan_id);
+        });
     }
 }
