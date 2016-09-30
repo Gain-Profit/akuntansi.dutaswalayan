@@ -34,7 +34,7 @@ class User extends Authenticatable
 
     public function perusahaanUser()
     {
-        return $this->hasMany('App\Models\perusahaanUser');
+        return $this->hasMany('App\Models\PerusahaanUser');
     }
 
     public function hasPerusahaan($id)
