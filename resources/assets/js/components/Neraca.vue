@@ -1,115 +1,99 @@
 <template>
-    <div class="container">
-        <div v-if="perusahaans.length === 0">
-            <div class="alert alert-warning text-center"><strong>Maaf Anda tidak terhubung dengan unit manapun</strong></div>
-        </div>
-        <div v-else class="panel panel-default">
-        <div class="panel-heading">
-            <h2 class="text-center">{{ label }}</h2>
-            <div class="row">
-                <div class="col-xs-6">
-                    Unit : 
-                    <div class="btn-group" role="group" aria-label="...">
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ perusahaan.nama }}
-                            <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li v-for="unit in perusahaans"><a @click="ubahPerusahaan(unit.id)">{{ unit.nama }}</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-6 text-right">
-                    Periode : 
-                    <div class="btn-group" role="group" aria-label="...">
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ bulan }}
-                            <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li v-for="n in 12"><a @click="ubahBulan(n+1)">{{ n+1 }}</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ tahun }}
-                            <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li v-for="n in 5"><a @click="ubahTahun(n + tahunSekarang - 4)">{{ n + tahunSekarang - 4 }}</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                                
-        </div>
-
-        <div class="panel-body">
-
-                <div v-if="neracas.length === 0">
-                    <div class="alert alert-warning"><strong>Maaf</strong> {{ label }} pada Periode ini tidak di temukan</div>
-                </div>
-            
-            <div v-else class="row">
-                <div class="col-md-6">
-                    <div class="col-xs-6">
-                        <h4>Aktiva</h4>
-                    </div>
-                    <div class="col-xs-6 text-right">
-                        <h4><strong>{{ sumAktiva | currencyDisplay }}</strong></h4>                        
-                    </div>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Nama Akun</th>
-                            <th class="text-right">Saldo</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="neraca in neracaDebits">
-                                <td>{{ neraca.nama_kiraan }}</td>
-                                <td class="text-right">
-                                    <strong>{{ neraca.saldo | currencyDisplay}}</strong>
-                                </td>
-                            </tr>                            
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="col-xs-6">
-                        <h4>Pasiva</h4>
-                    </div>
-                    <div class="col-xs-6 text-right">
-                        <h4><strong>{{ sumPasiva | currencyDisplay}}</strong></h4>                        
-                    </div>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Nama Akun</th>
-                            <th class="text-right">Saldo</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="neraca in neracaKredits">
-                                <td>{{ neraca.nama_kiraan }}</td>
-                                <td class="text-right">
-                                    <strong>{{ neraca.saldo | currencyDisplay}}</strong>
-                                </td>
-                            </tr>                            
-                        </tbody>
-                    </table>
-                </div>
-            </div>            
-        </div>
-    </div>
-    </div>
+<div class="container">
+<div v-if="perusahaans.length === 0">
+<div class="alert alert-warning text-center"><strong>Maaf Anda tidak terhubung dengan unit manapun</strong></div>
+</div>
+<div v-else class="panel panel-default">
+<div class="panel-heading">
+<h2 class="text-center">{{ label }}</h2>
+<div class="row">
+<div class="col-xs-6">
+Unit :
+<div class="btn-group" role="group" aria-label="...">
+<div class="btn-group" role="group">
+<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ perusahaan.nama }}<span class="caret"></span></button>
+<ul class="dropdown-menu">
+<li v-for="unit in perusahaans"><a @click="ubahPerusahaan(unit.id)">{{ unit.nama }}</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-xs-6 text-right">
+Periode :
+<div class="btn-group" role="group" aria-label="...">
+<div class="btn-group" role="group">
+<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ bulan }}<span class="caret"></span></button>
+<ul class="dropdown-menu">
+<li v-for="n in 12"><a @click="ubahBulan(n+1)">{{ n+1 }}</a></li>
+</ul>
+</div>
+<div class="btn-group" role="group">
+<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ tahun }}<span class="caret"></span></button>
+<ul class="dropdown-menu">
+<li v-for="n in 5"><a @click="ubahTahun(n + tahunSekarang - 4)">{{ n + tahunSekarang - 4 }}</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="panel-body">
+<div v-if="neracas.length === 0">
+<div class="alert alert-warning"><strong>Maaf</strong> {{ label }} pada Periode ini tidak di temukan</div>
+</div>
+<div v-else class="row">
+<div class="col-md-6">
+<div class="col-xs-6">
+<h4>Aktiva</h4>
+</div>
+<div class="col-xs-6 text-right">
+<h4><strong>{{ sumAktiva | currencyDisplay }}</strong></h4>
+</div>
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Nama Akun</th>
+<th class="text-right">Saldo</th>
+</tr>
+</thead>
+<tbody>
+<tr v-for="neraca in neracaDebits">
+<td>{{ neraca.nama_kiraan }}</td>
+<td class="text-right">
+<strong>{{ neraca.saldo | currencyDisplay}}</strong>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="col-md-6">
+<div class="col-xs-6">
+<h4>Pasiva</h4>
+</div>
+<div class="col-xs-6 text-right">
+<h4><strong>{{ sumPasiva | currencyDisplay}}</strong></h4>
+</div>
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Nama Akun</th>
+<th class="text-right">Saldo</th>
+</tr>
+</thead>
+<tbody>
+<tr v-for="neraca in neracaKredits">
+<td>{{ neraca.nama_kiraan }}</td>
+<td class="text-right">
+<strong>{{ neraca.saldo | currencyDisplay}}</strong>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
 </template>
 
 <script>

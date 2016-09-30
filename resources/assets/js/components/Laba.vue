@@ -1,86 +1,73 @@
 <template>
-    <div class="container">
-        <div v-if="perusahaans.length === 0">
-            <div class="alert alert-warning text-center"><strong>Maaf Anda tidak terhubung dengan unit manapun</strong></div>
-        </div>
-        <div v-else class="panel panel-default">
-            <div class="panel-heading">
-                <h2 class="text-center">Laba Rugi</h2>
-                <div class="row">
-                    <div class="col-xs-6">
-                        Unit : 
-                        <div class="btn-group" role="group" aria-label="...">
-                            <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ perusahaan.nama }}
-                                <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li v-for="unit in perusahaans"><a @click="ubahPerusahaan(unit.id)">{{ unit.nama }}</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-6 text-right">
-                        Periode : 
-                        <div class="btn-group" role="group" aria-label="...">
-                            <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ bulan }}
-                                <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li v-for="n in 12"><a @click="ubahBulan(n+1)">{{ n+1 }}</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ tahun }}
-                                <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li v-for="n in 5"><a @click="ubahTahun(n + tahunSekarang - 4)">{{ n + tahunSekarang - 4 }}</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>                                
-            </div>
-
-            <div class="panel-body">
-                <div v-if="labas.length === 0">
-                    <div class="alert alert-warning"><strong>Maaf</strong> Laba Rugi pada Periode ini tidak di temukan</div>
-                </div>
-            
-                <table v-else class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Nama Akun</th>
-                            <th class="text-right">Saldo</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <td><strong>Laba (Rugi)</strong></td>
-                            <td class="text-right">
-                                <strong>{{ totalLaba  | currencyDisplay }}</strong>
-                            </td>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        <tr v-for="laba in labas">
-                            <td>{{ laba.nama_kiraan }}</td>
-                            <td class="text-right">
-                                <strong>{{ laba.saldo_akhir | currencyDisplay }}</strong>
-                            </td>                            
-                        </tr>                            
-                    </tbody>
-                </table>                
-            </div>
-        </div>
-    </div>
+<div class="container">
+<div v-if="perusahaans.length === 0">
+<div class="alert alert-warning text-center"><strong>Maaf Anda tidak terhubung dengan unit manapun</strong></div>
+</div>
+<div v-else class="panel panel-default">
+<div class="panel-heading">
+<h2 class="text-center">Laba Rugi</h2>
+<div class="row">
+<div class="col-xs-6">
+Unit :
+<div class="btn-group" role="group" aria-label="...">
+<div class="btn-group" role="group">
+<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ perusahaan.nama }}<span class="caret"></span></button>
+<ul class="dropdown-menu">
+<li v-for="unit in perusahaans"><a @click="ubahPerusahaan(unit.id)">{{ unit.nama }}</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-xs-6 text-right">
+Periode :
+<div class="btn-group" role="group" aria-label="...">
+<div class="btn-group" role="group">
+<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ bulan }}<span class="caret"></span></button>
+<ul class="dropdown-menu">
+<li v-for="n in 12"><a @click="ubahBulan(n+1)">{{ n+1 }}</a></li>
+</ul>
+</div>
+<div class="btn-group" role="group">
+<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ tahun }}<span class="caret"></span></button>
+<ul class="dropdown-menu">
+<li v-for="n in 5"><a @click="ubahTahun(n + tahunSekarang - 4)">{{ n + tahunSekarang - 4 }}</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="panel-body">
+<div v-if="labas.length === 0">
+<div class="alert alert-warning"><strong>Maaf</strong> Laba Rugi pada Periode ini tidak di temukan</div>
+</div>
+<table v-else class="table table-striped">
+<thead>
+<tr>
+<th>Nama Akun</th>
+<th class="text-right">Saldo</th>
+</tr>
+</thead>
+<tfoot>
+<tr>
+<td><strong>Laba (Rugi)</strong></td>
+<td class="text-right">
+<strong>{{ totalLaba  | currencyDisplay }}</strong>
+</td>
+</tr>
+</tfoot>
+<tbody>
+<tr v-for="laba in labas">
+<td>{{ laba.nama_kiraan }}</td>
+<td class="text-right">
+<strong>{{ laba.saldo_akhir | currencyDisplay }}</strong>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </template>
 
 <script>
