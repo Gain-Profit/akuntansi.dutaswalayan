@@ -131,7 +131,9 @@ Periode :
                 this.$http.get('/api/' + this.jenis + '/' + this.perusahaan.id + '/' + this.tahun + this.bulan )
                         .then(response => {                            
                             this.neracas = response.data;
-                            this.splitNeracas();
+                            if (this.neracas.length > 0){ 
+                                this.splitNeracas();
+                            }
                         });
             },
             splitNeracas() {
