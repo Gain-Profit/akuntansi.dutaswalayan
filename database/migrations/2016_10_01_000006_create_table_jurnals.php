@@ -17,7 +17,7 @@ class CreateTableJurnals extends Migration
             $table->integer('id')->unsigned();
             $table->string('perusahaan_id',10);
             $table->date('tanggal');
-            $table->string('keterangan');
+            $table->string('keterangan',300);
             $table->string('referensi',50)->nullable();
             $table->char('jenis',2);
             $table->integer('nilai')->default(0);
