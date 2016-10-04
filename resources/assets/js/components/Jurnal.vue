@@ -147,8 +147,7 @@
                 halaman : 1,
                 prev: 'previous disabled',
                 tahun : new Date().getFullYear(),
-                bulan : 8,
-                // bulan : new Date().getMonth() + 1,
+                bulan : new Date().getMonth() + 1,
                 tahunSekarang : new Date().getFullYear(),
                 showForm:{
                     keterangan :'',
@@ -226,7 +225,7 @@
                 }
             },
             random() {
-                return Math.round((Math.pow(36, 30 + 1) - Math.random() * Math.pow(36, 30))).toString(36).slice(1);
+                return Math.round((Math.pow(36, 60 + 1) - Math.random() * Math.pow(36, 60))).toString(36).slice(1);
             },           
         },
         filters: {
