@@ -51,13 +51,6 @@ class JurnalController extends Controller
             abort(404);
         }
 
-        // $jurnalDetail = JurnalDetail::where('perusahaan_id',$comp)
-        //     ->where('jurnal_id', $index)
-        //     ->orderBy('urut')
-        //     ->get();
-
-        // return $jurnalDetail;
-
         $hasil = DB::select(
             'SELECT jd.kiraan_id, kr.nama, jd.debit, jd.kredit FROM jurnal_details jd
             INNER JOIN kiraans kr ON jd.kiraan_id = kr.id AND kr.perusahaan_id = jd.perusahaan_id 
