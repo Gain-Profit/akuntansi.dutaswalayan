@@ -41,6 +41,7 @@ Periode :
 <div v-if="balances.length === 0">
 <div class="alert alert-warning"><strong>Maaf</strong> Trial Balance pada Periode ini tidak di temukan</div>
 </div>
+<div class="table-responsive">
 <table v-else class="table table-striped">
 <thead>
 <tr>
@@ -72,6 +73,7 @@ Periode :
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 </div>
 </div>
