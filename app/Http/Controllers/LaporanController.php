@@ -36,4 +36,9 @@ class LaporanController extends Controller
     {
         return view('laporan.balance');
     }
+
+    public function bukuBesar()
+    {
+        return view('laporan.bukubesar');
+    }
 }
