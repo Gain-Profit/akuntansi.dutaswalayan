@@ -19,7 +19,7 @@ class KiraanController extends Controller
         return view('kiraan.index');
     }
 
-    public function getKiraan($comp)
+    public function getKiraan($comp, $random)
     {
         if (Gate::denies('show-unit', $comp)) {
             abort(404);
@@ -36,7 +36,7 @@ class KiraanController extends Controller
         return $hasil;
     }
 
-    public function getKiraanSimple($comp){
+    public function getKiraanSimple($comp, $random){
         if (Gate::denies('show-unit', $comp)) {
             abort(404);
         }

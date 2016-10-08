@@ -30,19 +30,19 @@ Route::get('/laba', 'LaporanController@laba');
 Route::get('/buku-besar', 'LaporanController@bukuBesar');
 
 Route::group(['prefix' => 'api'], function () {
-    Route::get('/kiraan/{comp}', 'KiraanController@getKiraan');
+    Route::get('/kiraan/{comp}/{random}', 'KiraanController@getKiraan');
 
-    Route::get('/kiraan-simple/{comp}', 'KiraanController@getKiraanSimple');
+    Route::get('/kiraan-simple/{comp}/{random}', 'KiraanController@getKiraanSimple');
     
-    Route::get('/awal/{comp}/{period}', 'SejarahController@getSaldoAwal');
+    Route::get('/awal/{comp}/{period}/{random}', 'SejarahController@getSaldoAwal');
 
-    Route::get('/balance/{comp}/{period}', 'SejarahController@getBalance');
+    Route::get('/balance/{comp}/{period}/{random}', 'SejarahController@getBalance');
 
-    Route::get('/neraca/{comp}/{period}', 'SejarahController@getNeraca');
+    Route::get('/neraca/{comp}/{period}/{random}', 'SejarahController@getNeraca');
 
-    Route::get('/laba/{comp}/{period}', 'SejarahController@getLaba');
+    Route::get('/laba/{comp}/{period}/{random}', 'SejarahController@getLaba');
 
-    Route::get('/perusahaans', 'PerusahaanController@getPerusahaans');
+    Route::get('/perusahaans/{random}', 'PerusahaanController@getPerusahaans');
 
     Route::get('/jurnal/{comp}/{period}/{hal}/{random}','JurnalController@getJurnals');
 

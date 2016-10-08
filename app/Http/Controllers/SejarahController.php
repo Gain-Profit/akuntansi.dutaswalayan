@@ -14,7 +14,7 @@ class SejarahController extends Controller
         $this->middleware('auth');
     }
 
-    public function getSaldoAwal($comp, $period) {
+    public function getSaldoAwal($comp, $period, $random) {
         if (Gate::denies('show-unit', $comp)) {
             abort(404);
         }
@@ -36,7 +36,7 @@ class SejarahController extends Controller
         return $hasil;
     }
 
-    public function getBalance($comp, $period)
+    public function getBalance($comp, $period, $random)
     {
         if (Gate::denies('show-unit', $comp)) {
             abort(404);
@@ -56,7 +56,7 @@ class SejarahController extends Controller
         return $hasil;
     }
     
-    public function getNeraca($comp, $period)
+    public function getNeraca($comp, $period, $random)
     {
         if (Gate::denies('show-unit', $comp)) {
             abort(404);
@@ -79,7 +79,7 @@ class SejarahController extends Controller
         return $hasil;
     }
 
-    public function getLaba($comp, $period)
+    public function getLaba($comp, $period, $random)
     {
         if (Gate::denies('show-unit', $comp)) {
             abort(404);

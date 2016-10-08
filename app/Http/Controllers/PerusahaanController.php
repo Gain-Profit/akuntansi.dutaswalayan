@@ -13,7 +13,7 @@ class PerusahaanController extends Controller
         $this->middleware('auth');
     }
 
-    public function getPerusahaans()
+    public function getPerusahaans($random)
     {
         return DB::select('SELECT p.id, p.nama 
             FROM perusahaans p 
