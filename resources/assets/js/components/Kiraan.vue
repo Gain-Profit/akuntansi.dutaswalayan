@@ -61,7 +61,7 @@ Unit :
         },
         methods: {
             getPerusahaans() {
-                this.$http.get('/api/perusahaans')
+                this.$http.get('/api/perusahaans/' + this.random())
                         .then(response => {                            
                             this.perusahaans = response.data;
                             if (this.perusahaans.length > 0){ 
@@ -71,7 +71,7 @@ Unit :
                         });
             },
             getkiraans() {
-                this.$http.get('/api/kiraan/' + this.perusahaan.id)
+                this.$http.get('/api/kiraan/' + this.perusahaan.id + '/' + this.random())
                         .then(response => {                            
                             this.kiraans = response.data;                                                        
                         });
@@ -81,7 +81,10 @@ Unit :
                     this.perusahaan = _.find(this.perusahaans, { 'id' : $kode });
                     this.getkiraans();
                 }
-            }            
+            },            
+            random() {
+                return Math.round((Math.pow(36, 60 + 1) - Math.random() * Math.pow(36, 60))).toString(36).slice(1);
+            },           
         }        
     }
 </script>

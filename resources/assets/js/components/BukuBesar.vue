@@ -113,7 +113,7 @@ Saldo Awal : <strong>{{ saldoAwal | currencyDisplay }}</strong>
         },
         methods: {
             getPerusahaans() {
-                this.$http.get('/api/perusahaans')
+                this.$http.get('/api/perusahaans/' + this.random())
                         .then(response => {                            
                             this.perusahaans = response.data;
                             if (this.perusahaans.length > 0){ 
@@ -123,7 +123,7 @@ Saldo Awal : <strong>{{ saldoAwal | currencyDisplay }}</strong>
                         });
             },
             getKiraans() {
-                this.$http.get('/api/kiraan-simple/' + this.perusahaan.id)
+                this.$http.get('/api/kiraan-simple/' + this.perusahaan.id + '/' + this.random())
                         .then(response => {
                             this.kiraans = response.data;
                             if (this.kiraans.length > 0){ 

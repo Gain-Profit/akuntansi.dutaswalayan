@@ -157,7 +157,7 @@ Detail Jurnal
         },
         methods: {
             getPerusahaans() {
-                this.$http.get('/api/perusahaans')
+                this.$http.get('/api/perusahaans/' + this.random())
                         .then(response => {
                             this.perusahaans = response.data;
                             if (this.perusahaans.length > 0){ 

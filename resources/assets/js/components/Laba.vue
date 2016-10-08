@@ -88,7 +88,7 @@ Periode :
         },
         methods: {
             getPerusahaans() {
-                this.$http.get('/api/perusahaans')
+                this.$http.get('/api/perusahaans/' + this.random())
                         .then(response => {                            
                             this.perusahaans = response.data;
                             if (this.perusahaans.length > 0){ 
@@ -98,7 +98,7 @@ Periode :
                         });
             },
             getLabas() {
-                this.$http.get('/api/laba/' + this.perusahaan.id + '/' + this.tahun + this.bulan )
+                this.$http.get('/api/laba/' + this.perusahaan.id + '/' + this.tahun + this.bulan + '/' + this.random() )
                         .then(response => {                            
                             this.labas = response.data;
                             this.hanyaBernilai();                            
@@ -127,8 +127,11 @@ Periode :
                     this.perusahaan = _.find(this.perusahaans, { 'id' : $kode });
                     this.getLabas();
                 }
-            }            
-        },
+            },
+             random() {
+                return Math.round((Math.pow(36, 60 + 1) - Math.random() * Math.pow(36, 60))).toString(36).slice(1);
+            },           
+       },
         filters: {
             currencyDisplay: {
                 read: function(val) {

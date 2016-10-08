@@ -118,7 +118,7 @@ Periode :
         props : ['jenis','label'],
         methods: {
             getPerusahaans() {
-                this.$http.get('/api/perusahaans')
+                this.$http.get('/api/perusahaans/' + this.random())
                         .then(response => {                            
                             this.perusahaans = response.data;
                             if (this.perusahaans.length > 0){ 
@@ -128,7 +128,7 @@ Periode :
                         });
             },
             getNeracas() {
-                this.$http.get('/api/' + this.jenis + '/' + this.perusahaan.id + '/' + this.tahun + this.bulan )
+                this.$http.get('/api/' + this.jenis + '/' + this.perusahaan.id + '/' + this.tahun + this.bulan + '/' + this.random() )
                         .then(response => {                            
                             this.neracas = response.data;
                             if (this.neracas.length > 0){ 
@@ -169,7 +169,10 @@ Periode :
                     this.perusahaan = _.find(this.perusahaans, { 'id' : $kode });
                     this.getNeracas();
                 }
-            }            
+            },
+            random() {
+                return Math.round((Math.pow(36, 60 + 1) - Math.random() * Math.pow(36, 60))).toString(36).slice(1);
+            },           
         },
         filters: {
             currencyDisplay: {
