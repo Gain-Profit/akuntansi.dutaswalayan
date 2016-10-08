@@ -14,6 +14,11 @@ class KiraanController extends Controller
         $this->middleware('auth');
     }
 
+    public function index()
+    {
+        return view('kiraan.index');
+    }
+
     public function getKiraan($comp)
     {
         if (Gate::denies('show-unit', $comp)) {
@@ -31,8 +36,15 @@ class KiraanController extends Controller
         return $hasil;
     }
 
-    public function index()
-    {
-        return view('kiraan.index');
+    public function getKiraanSimple($comp){
+        if (Gate::denies('show-unit', $comp)) {
+            abort(404);
+        }
+
+        $hasil = DB::select(
+            'SELECT kr.id, kr.nama FROM kiraans kr WHERE kr.perusahaan_id = ?',[$comp]
+        );
+
+        return $hasil;
     }
 }

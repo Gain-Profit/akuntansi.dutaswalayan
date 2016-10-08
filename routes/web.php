@@ -30,6 +30,8 @@ Route::get('/laba', 'LaporanController@laba');
 Route::group(['prefix' => 'api'], function () {
     Route::get('/kiraan/{comp}', 'KiraanController@getKiraan');
 
+    Route::get('/kiraan-simple/{comp}', 'KiraanController@getKiraanSimple');
+    
     Route::get('/awal/{comp}/{period}', 'SejarahController@getSaldoAwal');
 
     Route::get('/balance/{comp}/{period}', 'SejarahController@getBalance');
