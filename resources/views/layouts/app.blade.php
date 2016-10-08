@@ -67,7 +67,7 @@
                             <li><a href="{{ url('/neraca') }}">Neraca</a></li>
                             <li><a href="{{ url('/laba') }}">Laba/ Rugi</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">Buku Besar</a></li>
+                            <li><a href="{{ url('/buku-besar') }}">Buku Besar</a></li>
                         </ul>
                     </li>
                     @endif
