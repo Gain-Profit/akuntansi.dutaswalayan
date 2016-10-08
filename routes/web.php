@@ -27,6 +27,8 @@ Route::get('/jurnal','JurnalController@index');
 
 Route::get('/laba', 'LaporanController@laba');
 
+Route::get('/buku-besar', 'LaporanController@bukuBesar');
+
 Route::group(['prefix' => 'api'], function () {
     Route::get('/kiraan/{comp}', 'KiraanController@getKiraan');
 
@@ -45,4 +47,6 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('/jurnal/{comp}/{period}/{hal}/{random}','JurnalController@getJurnals');
 
     Route::get('/jurnal-detail/{comp}/{index}/{random}','JurnalController@getJurnalDetail');
+
+    Route::get('/buku-besar/{comp}/{kiraan}/{period}/{random}', 'JurnalController@getBukuBesar');
 });
