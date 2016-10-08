@@ -59,7 +59,35 @@ class JurnalController extends Controller
         );
     
         return $hasil;
+    }
 
+    public function getBukuBesar($comp, $kiraan, $period, $random)
+    {
+        if (Gate::denies('show-unit', $comp)) {
+            abort(404);
+        }
+
+        $tahun = substr($period, 0, 4);
+        $bulan = substr($period, 4);
+
+        $head = DB::select(
+            'SELECT kiraan_id, saldo_awal, (saldo_awal + debit - kredit) AS saldo_akhir FROM jurnal_sejarahs 
+             WHERE perusahaan_id = ? AND kiraan_id = ? AND tahun = ? AND bulan = ?',
+             [$comp, $kiraan, $tahun, $bulan]
+        );
+
+        $body = DB::select(
+            'SELECT jd.kiraan_id, ju.tanggal, ju.keterangan, jd.debit, jd.kredit
+             FROM jurnals ju INNER JOIN jurnal_details jd 
+             ON ju.id = jd.jurnal_id AND ju.perusahaan_id = jd.perusahaan_id
+             WHERE jd.perusahaan_id =? AND jd.kiraan_id = ? AND YEAR(ju.tanggal) = ? AND MONTH(ju.tanggal) = ?
+             ORDER BY ju.tanggal,ju.id',
+             [$comp, $kiraan, $tahun, $bulan]
+        );
+
+        $hasil = array( "head" => $head, "body" => $body );
+
+        return $hasil;
     }
 
 }
