@@ -103,8 +103,7 @@ Saldo Awal : <strong>{{ saldoAwal | currencyDisplay }}</strong>
                 saldoAwal :0,
                 saldoAkhir :0,
                 tahun : new Date().getFullYear(),
-                bulan : 8,
-                // bulan : new Date().getMonth() + 1,
+                bulan : new Date().getMonth() + 1,
                 tahunSekarang : new Date().getFullYear(),
             }
         },
