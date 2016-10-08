@@ -23,6 +23,8 @@ Vue.component('laba', require ('./components/Laba.vue'));
 
 Vue.component('jurnal', require ('./components/Jurnal.vue'));
 
+Vue.component('bukubesar', require ('./components/BukuBesar.vue'));
+
 const app = new Vue({
     el: 'body'
 });
