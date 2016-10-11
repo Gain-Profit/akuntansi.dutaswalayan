@@ -49,7 +49,7 @@
                             <li><a href="{{ url('/kiraan') }}">Daftar Akun</a></li>
                             <li><a href="{{ url('/awal') }}">Saldo Awal Akun</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">Daftar Asset</a></li>
+                            <li><a href="{{ url('/asset') }}">Daftar Asset</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
