@@ -25,6 +25,8 @@ Vue.component('jurnal', require ('./components/Jurnal.vue'));
 
 Vue.component('bukubesar', require ('./components/BukuBesar.vue'));
 
+Vue.component('asset', require ('./components/Asset.vue'));
+
 const app = new Vue({
     el: 'body'
 });
