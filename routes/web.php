@@ -15,6 +15,8 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index');
 
+Route::get('/asset', 'AssetController@index');
+
 Route::get('/awal', 'LaporanController@awal');
 
 Route::get('/kiraan', 'KiraanController@index');
@@ -49,4 +51,6 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('/jurnal-detail/{comp}/{index}/{random}','JurnalController@getJurnalDetail');
 
     Route::get('/buku-besar/{comp}/{kiraan}/{period}/{random}', 'JurnalController@getBukuBesar');
+
+    Route::get('/asset/{comp}/{random}', 'AssetController@getAsset');
 });
