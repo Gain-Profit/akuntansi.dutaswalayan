@@ -134,11 +134,9 @@ Saldo Awal : <strong>{{ saldoAwal | currencyDisplay }}</strong>
             getBukuBesars() {
                 this.$http.get('/api/buku-besar/' + this.perusahaan.id + '/' + this.kiraan.id + '/' + this.tahun + this.bulan + '/' + this.random() )
                         .then(response => {
+                            this.saldoAwal = response.data.saldo_awal;
+                            this.saldoAkhir = response.data.saldo_akhir;
                             this.books = response.data;
-                            if (this.books.length > 0){ 
-                                this.saldoAwal = response.data.head[0].saldo_awal;
-                                this.saldoAkhir = response.data.head[0].saldo_akhir;
-                            }
                         });
             },
             ubahBulan($bulan) {
