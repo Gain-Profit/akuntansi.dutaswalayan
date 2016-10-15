@@ -85,7 +85,11 @@ class JurnalController extends Controller
              [$comp, $kiraan, $tahun, $bulan]
         );
 
-        $hasil = array( "head" => $head, "body" => $body );
+        $hasil = array( "kiraan_id" => $head[0]->saldo_akhir,
+                        "saldo_awal" => $head[0]->saldo_awal,
+                        "saldo_akhir" => $head[0]->saldo_akhir,
+                        "body" => $body 
+                 );
 
         return $hasil;
     }
