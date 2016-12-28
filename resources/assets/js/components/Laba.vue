@@ -52,7 +52,7 @@ Periode :
 <tr>
 <td><strong>Laba (Rugi)</strong></td>
 <td class="text-right">
-<strong>{{ totalLaba  | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(totalLaba) }}</strong>
 </td>
 </tr>
 </tfoot>
@@ -60,7 +60,7 @@ Periode :
 <tr v-for="laba in labas">
 <td>{{ laba.nama_kiraan }}</td>
 <td class="text-right">
-<strong>{{ laba.saldo_akhir | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(laba.saldo_akhir) }}</strong>
 </td>
 </tr>
 </tbody>
@@ -83,7 +83,7 @@ Periode :
                 tahunSekarang : new Date().getFullYear(),                
             }
         },
-        ready() {
+        mounted() {
             this.getPerusahaans();            
         },
         methods: {
@@ -131,17 +131,13 @@ Periode :
              random() {
                 return Math.round((Math.pow(36, 60 + 1) - Math.random() * Math.pow(36, 60))).toString(36).slice(1);
             },           
+            currencyDisplay(val) {
+                var hasil = Math.abs(val).toLocaleString('id-ID',{minimumFractionDigits: 2, maximumFractionDigits: 2});
+                if (val < 0) {
+                    hasil = '(' + hasil + ')';
+                }
+                return hasil;                                
+            },
        },
-        filters: {
-            currencyDisplay: {
-                read: function(val) {
-                    var hasil = Math.abs(val).toLocaleString();
-                    if (val < 0) {
-                        hasil = '(' + hasil + ')';
-                    }
-                    return hasil;
-                },                
-            }
-        }        
     }
 </script>

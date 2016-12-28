@@ -44,7 +44,7 @@ Periode :
 <div class="m-b-none" v-if="jurnals.length > 0">
 <nav aria-label="...">
 <ul class="pager">
-<li class="{{ prev }}"><a @click="ubahHalaman(halaman - 1)"><span aria-hidden="true">&larr;</span> Newer</a></li>
+<li v-bind:class="prev"><a @click="ubahHalaman(halaman - 1)"><span aria-hidden="true">&larr;</span> Newer</a></li>
 <li class="next"><a @click="ubahHalaman(halaman + 1)">Older <span aria-hidden="true">&rarr;</span></a></li>
 </ul>
 </nav>
@@ -65,10 +65,10 @@ Periode :
 <button type="button" class="btn btn-primary btn-xs" @click="show(jurnal)">Detail</button>
 </td>
 <td>{{ jurnal.tanggal }}</td>
-<td>{{ jurnal.keterangan | cutString '70' }}</td>
+<td>{{ cutString(jurnal.keterangan,70) }}</td>
 <td>{{ jurnal.referensi }}</td>
 <td class="text-right">
-<strong>{{ jurnal.nilai | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(jurnal.nilai) }}</strong>
 </td>
 </tr>
 </tbody>
@@ -99,10 +99,10 @@ Detail Jurnal
 <tr>
 <td colspan=2><strong>Total</strong></td>
 <td class="text-right">
-<strong>{{ showForm.totalDebit  | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(showForm.totalDebit) }}</strong>
 </td>
 <td class="text-right">
-<strong>{{ showForm.totalKredit | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(showForm.totalKredit) }}</strong>
 </td>
 </tr>
 </tfoot>
@@ -111,10 +111,10 @@ Detail Jurnal
 <td>{{ detail.kiraan_id }}</td>
 <td>{{ detail.nama}}</td>
 <td class="text-right">
-<strong>{{ detail.debit | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(detail.debit) }}</strong>
 </td>
 <td class="text-right">
-<strong>{{ detail.kredit | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(detail.kredit) }}</strong>
 </td>
 </tr>
 </tbody>
@@ -152,7 +152,7 @@ Detail Jurnal
                 },             
             }
         },
-        ready() {
+        mounted() {
             this.getPerusahaans();            
         },
         methods: {
@@ -222,23 +222,17 @@ Detail Jurnal
             random() {
                 return Math.round((Math.pow(36, 60 + 1) - Math.random() * Math.pow(36, 60))).toString(36).slice(1);
             },           
-        },
-        filters: {
-            currencyDisplay: {
-                read: function(val) {
-                    var hasil = Math.abs(val).toLocaleString();
-                    if (val < 0) {
-                        hasil = '(' + hasil + ')';
-                    }
-                    return hasil;
-                },
-            },
-            cutString:{
-                read: function(val, panjang) {
-                    var hasil = String(val);
-                    return hasil.substr(0, panjang);
+            currencyDisplay(val) {
+                var hasil = Math.abs(val).toLocaleString('id-ID',{minimumFractionDigits: 2, maximumFractionDigits: 2});
+                if (val < 0) {
+                    hasil = '(' + hasil + ')';
                 }
-            }
-        }
+                return hasil;                                
+            },
+            cutString(val, panjang) {
+                var hasil = String(val);
+                return hasil.substr(0, panjang);                
+            },
+        },
     }
 </script>

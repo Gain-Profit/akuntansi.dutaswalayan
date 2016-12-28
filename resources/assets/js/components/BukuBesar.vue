@@ -51,7 +51,7 @@ Kiraan :
 </div>
 </div>
 <div class="col-xs-6 text-right">
-Saldo Awal : <strong>{{ saldoAwal | currencyDisplay }}</strong>
+Saldo Awal : <strong>{{ currencyDisplay(saldoAwal) }}</strong>
 </div>
 </div>
 <div class="table-responsive">
@@ -68,19 +68,19 @@ Saldo Awal : <strong>{{ saldoAwal | currencyDisplay }}</strong>
 <tr>
 <td colspan="3"><strong>Saldo Akhir</strong></td>
 <td class="text-right">
-<strong>{{ saldoAkhir | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(saldoAkhir) }}</strong>
 </td>
 </tr>
 </tfoot>
 <tbody>
 <tr v-for="book in books.body">
 <td>{{ book.tanggal }}</td>
-<td>{{ book.keterangan | cutString '50' }}</td>
+<td>{{ cutString(book.keterangan,50) }}</td>
 <td class="text-right">
-<strong>{{ book.debit | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(book.debit) }}</strong>
 </td>
 <td class="text-right">
-<strong>{{ book.kredit | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(book.kredit) }}</strong>
 </td>
 </tr>
 </tbody>
@@ -107,7 +107,7 @@ Saldo Awal : <strong>{{ saldoAwal | currencyDisplay }}</strong>
                 tahunSekarang : new Date().getFullYear(),
             }
         },
-        ready() {
+        mounted() {
             this.getPerusahaans();
         },
         methods: {
@@ -166,22 +166,16 @@ Saldo Awal : <strong>{{ saldoAwal | currencyDisplay }}</strong>
             random() {
                 return Math.round((Math.pow(36, 60 + 1) - Math.random() * Math.pow(36, 60))).toString(36).slice(1);
             },           
-        },
-        filters: {
-            currencyDisplay: {
-                read: function(val) {
-                    var hasil = Math.abs(val).toLocaleString();
-                    if (val < 0) {
-                        hasil = '(' + hasil + ')';
-                    }
-                    return hasil;
-                },                
+            currencyDisplay(val) {
+                var hasil = Math.abs(val).toLocaleString('id-ID',{minimumFractionDigits: 2, maximumFractionDigits: 2});
+                if (val < 0) {
+                    hasil = '(' + hasil + ')';
+                }
+                return hasil;              
             },
-            cutString:{
-                read: function(val, panjang) {
-                    var hasil = String(val);
-                    return hasil.substr(0, panjang);
-                },
+            cutString(val, panjang) {
+                var hasil = String(val);
+                return hasil.substr(0, panjang);                
             },
         },
     }

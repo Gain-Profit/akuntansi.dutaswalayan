@@ -47,7 +47,7 @@ Periode :
 <h4>Aktiva</h4>
 </div>
 <div class="col-xs-6 text-right">
-<h4><strong>{{ sumAktiva | currencyDisplay }}</strong></h4>
+<h4><strong>{{ currencyDisplay(sumAktiva) }}</strong></h4>
 </div>
 <table class="table table-striped">
 <thead>
@@ -60,7 +60,7 @@ Periode :
 <tr v-for="neraca in neracaDebits">
 <td>{{ neraca.nama_kiraan }}</td>
 <td class="text-right">
-<strong>{{ neraca.saldo | currencyDisplay}}</strong>
+<strong>{{ currencyDisplay(neraca.saldo) }}</strong>
 </td>
 </tr>
 </tbody>
@@ -71,7 +71,7 @@ Periode :
 <h4>Pasiva</h4>
 </div>
 <div class="col-xs-6 text-right">
-<h4><strong>{{ sumPasiva | currencyDisplay}}</strong></h4>
+<h4><strong>{{ currencyDisplay(sumPasiva) }}</strong></h4>
 </div>
 <table class="table table-striped">
 <thead>
@@ -84,7 +84,7 @@ Periode :
 <tr v-for="neraca in neracaKredits">
 <td>{{ neraca.nama_kiraan }}</td>
 <td class="text-right">
-<strong>{{ neraca.saldo | currencyDisplay}}</strong>
+<strong>{{ currencyDisplay(neraca.saldo) }}</strong>
 </td>
 </tr>
 </tbody>
@@ -112,7 +112,7 @@ Periode :
                 tahunSekarang : new Date().getFullYear(),                
             }
         },
-        ready() {
+        mounted() {
             this.getPerusahaans();
         },
         props : ['jenis','label'],
@@ -173,17 +173,13 @@ Periode :
             random() {
                 return Math.round((Math.pow(36, 60 + 1) - Math.random() * Math.pow(36, 60))).toString(36).slice(1);
             },           
+            currencyDisplay(val) {
+                var hasil = Math.abs(val).toLocaleString('id-ID',{minimumFractionDigits: 2, maximumFractionDigits: 2});
+                if (val < 0) {
+                    hasil = '(' + hasil + ')';
+                }
+                return hasil;                                
+            },
         },
-        filters: {
-            currencyDisplay: {
-                read: function(val) {
-                    var hasil = Math.abs(val).toLocaleString();
-                    if (val < 0) {
-                        hasil = '(' + hasil + ')';
-                    }
-                    return hasil;
-                },                
-            }
-        }        
     }
 </script>

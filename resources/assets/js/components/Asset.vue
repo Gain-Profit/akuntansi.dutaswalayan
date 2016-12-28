@@ -39,19 +39,19 @@ Unit :
 <td>{{ asset.tanggal }}</td>
 <td>{{ asset.deskripsi }}</td>
 <td class="text-right">
-<strong>{{ asset.nilai | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(asset.nilai) }}</strong>
 </td>
 <td class="text-right">
-<strong>{{ susutBulan(asset) | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(susutBulan(asset)) }}</strong>
 </td>
 <td class="text-right">
-<strong>{{ akumSusut(asset) | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(akumSusut(asset)) }}</strong>
 </td>
 <td class="text-right">
-<strong>{{ asset.residu | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(asset.residu) }}</strong>
 </td>
 <td class="text-right">
-<strong>{{ nilaiBuku(asset) | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(nilaiBuku(asset)) }}</strong>
 </td>
 </tr>
 </tbody>
@@ -71,7 +71,7 @@ Unit :
                 perusahaans : [0],
             }
         },
-        ready() {
+        mounted() {
             this.getPerusahaans();            
         },
         methods: {
@@ -127,17 +127,13 @@ Unit :
             random() {
                 return Math.round((Math.pow(36, 60 + 1) - Math.random() * Math.pow(36, 60))).toString(36).slice(1);
             },           
-        },
-        filters: {
-            currencyDisplay: {
-                read: function(val) {
-                    var hasil = Math.abs(val).toLocaleString('id-ID',{minimumFractionDigits: 2, maximumFractionDigits: 2});
-                    if (val < 0) {
-                        hasil = '(' + hasil + ')';
-                    }
-                    return hasil;
-                },                
-            }
-        }  
+            currencyDisplay(val) {
+                var hasil = Math.abs(val).toLocaleString('id-ID',{minimumFractionDigits: 2, maximumFractionDigits: 2});
+                if (val < 0) {
+                    hasil = '(' + hasil + ')';
+                }
+                return hasil;                                
+            },
+        },        
     }
 </script>

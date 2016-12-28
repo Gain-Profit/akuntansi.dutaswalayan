@@ -42,7 +42,7 @@ Periode :
 <div class="alert alert-warning"><strong>Maaf</strong> Trial Balance pada Periode ini tidak di temukan</div>
 </div>
 <div class="table-responsive">
-<table v-else class="table table-striped">
+<table class="table table-striped">
 <thead>
 <tr>
 <th>Nama Akun</th>
@@ -54,10 +54,10 @@ Periode :
 <tr>
 <td><strong>Total</strong></td>
 <td class="text-right">
-<strong>{{ totalDebit | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(totalDebit) }}</strong>
 </td>
 <td class="text-right">
-<strong>{{ totalKredit | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(totalKredit) }}</strong>
 </td>
 </tr>
 </tfoot>
@@ -65,10 +65,10 @@ Periode :
 <tr v-for="balance in balances">
 <td>{{ balance.nama_kiraan }}</td>
 <td class="text-right">
-<strong>{{ balance.debit | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(balance.debit) }}</strong>
 </td>
 <td class="text-right">
-<strong>{{ balance.kredit | currencyDisplay }}</strong>
+<strong>{{ currencyDisplay(balance.kredit) }}</strong>
 </td>
 </tr>
 </tbody>
@@ -93,7 +93,7 @@ Periode :
                 tahunSekarang : new Date().getFullYear(),                
             }
         },
-        ready() {
+        mounted() {
             this.getPerusahaans();
         },
         methods: {
@@ -142,17 +142,13 @@ Periode :
             random() {
                 return Math.round((Math.pow(36, 60 + 1) - Math.random() * Math.pow(36, 60))).toString(36).slice(1);
             },           
+            currencyDisplay(val) {
+                var hasil = Math.abs(val).toLocaleString('id-ID',{minimumFractionDigits: 2, maximumFractionDigits: 2});
+                if (val < 0) {
+                    hasil = '(' + hasil + ')';
+                }
+                return hasil;                                
+            },
         },
-        filters: {
-            currencyDisplay: {
-                read: function(val) {
-                    var hasil = Math.abs(val).toLocaleString();
-                    if (val < 0) {
-                        hasil = '(' + hasil + ')';
-                    }
-                    return hasil;
-                },                
-            }
-        }        
     }
 </script>

@@ -56,7 +56,7 @@ Unit :
                 perusahaans : [0],
             }
         },
-        ready() {
+        mounted() {
             this.getPerusahaans();            
         },
         methods: {
