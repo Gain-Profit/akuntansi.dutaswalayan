@@ -24,7 +24,7 @@ Periode :
 <div class="btn-group" role="group">
 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ bulan }}<span class="caret"></span></button>
 <ul class="dropdown-menu">
-<li v-for="n in 12"><a @click="ubahBulan(n+1)">{{ n+1 }}</a></li>
+<li v-for="n in 12"><a @click="ubahBulan(n)">{{ n }}</a></li>
 </ul>
 </div>
 <div class="btn-group" role="group">
