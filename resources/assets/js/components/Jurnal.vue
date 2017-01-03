@@ -30,7 +30,7 @@ Periode :
 <div class="btn-group" role="group">
 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ tahun }} <span class="caret"></span></button>
 <ul class="dropdown-menu">
-<li v-for="n in 5"><a @click="ubahTahun(n + tahunSekarang - 4)">{{ n + tahunSekarang - 4 }}</a></li>
+<li v-for="n in 5"><a @click="ubahTahun(n + tahunSekarang - 5)">{{ n + tahunSekarang - 5 }}</a></li>
 </ul>
 </div>
 </div>
