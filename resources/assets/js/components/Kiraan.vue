@@ -61,7 +61,7 @@ Unit :
         },
         methods: {
             getPerusahaans() {
-                this.$http.get('/api/perusahaans/' + this.random())
+                axios.get('/api/perusahaans/' + this.random())
                         .then(response => {                            
                             this.perusahaans = response.data;
                             if (this.perusahaans.length > 0){ 
@@ -71,7 +71,7 @@ Unit :
                         });
             },
             getkiraans() {
-                this.$http.get('/api/kiraan/' + this.perusahaan.id + '/' + this.random())
+                axios.get('/api/kiraan/' + this.perusahaan.id + '/' + this.random())
                         .then(response => {                            
                             this.kiraans = response.data;                                                        
                         });

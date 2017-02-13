@@ -88,7 +88,7 @@ Periode :
         },
         methods: {
             getPerusahaans() {
-                this.$http.get('/api/perusahaans/' + this.random())
+                axios.get('/api/perusahaans/' + this.random())
                         .then(response => {                            
                             this.perusahaans = response.data;
                             if (this.perusahaans.length > 0){ 
@@ -98,7 +98,7 @@ Periode :
                         });
             },
             getLabas() {
-                this.$http.get('/api/laba/' + this.perusahaan.id + '/' + this.tahun + this.bulan + '/' + this.random() )
+                axios.get('/api/laba/' + this.perusahaan.id + '/' + this.tahun + this.bulan + '/' + this.random() )
                         .then(response => {                            
                             this.labas = response.data;
                             this.hanyaBernilai();                            

@@ -112,7 +112,7 @@ Saldo Awal : <strong>{{ currencyDisplay(saldoAwal) }}</strong>
         },
         methods: {
             getPerusahaans() {
-                this.$http.get('/api/perusahaans/' + this.random())
+                axios.get('/api/perusahaans/' + this.random())
                         .then(response => {                            
                             this.perusahaans = response.data;
                             if (this.perusahaans.length > 0){ 
@@ -122,7 +122,7 @@ Saldo Awal : <strong>{{ currencyDisplay(saldoAwal) }}</strong>
                         });
             },
             getKiraans() {
-                this.$http.get('/api/kiraan-simple/' + this.perusahaan.id + '/' + this.random())
+                axios.get('/api/kiraan-simple/' + this.perusahaan.id + '/' + this.random())
                         .then(response => {
                             this.kiraans = response.data;
                             if (this.kiraans.length > 0){ 
@@ -132,7 +132,7 @@ Saldo Awal : <strong>{{ currencyDisplay(saldoAwal) }}</strong>
                         });
             },
             getBukuBesars() {
-                this.$http.get('/api/buku-besar/' + this.perusahaan.id + '/' + this.kiraan.id + '/' + this.tahun + this.bulan + '/' + this.random() )
+                axios.get('/api/buku-besar/' + this.perusahaan.id + '/' + this.kiraan.id + '/' + this.tahun + this.bulan + '/' + this.random() )
                         .then(response => {
                             this.saldoAwal = response.data.saldo_awal;
                             this.saldoAkhir = response.data.saldo_akhir;

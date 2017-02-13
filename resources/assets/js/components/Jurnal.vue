@@ -157,7 +157,7 @@ Detail Jurnal
         },
         methods: {
             getPerusahaans() {
-                this.$http.get('/api/perusahaans/' + this.random())
+                axios.get('/api/perusahaans/' + this.random())
                         .then(response => {
                             this.perusahaans = response.data;
                             if (this.perusahaans.length > 0){ 
@@ -167,13 +167,13 @@ Detail Jurnal
                         });
             },
             getJurnals() {
-                this.$http.get('/api/jurnal/' + this.perusahaan.id + '/' + this.tahun + this.bulan + '/' + this.halaman + '/' + this.random() )
+                axios.get('/api/jurnal/' + this.perusahaan.id + '/' + this.tahun + this.bulan + '/' + this.halaman + '/' + this.random() )
                         .then(response => {
                             this.jurnals = response.data;
                         });
             },
             show(jurnal) {
-                this.$http.get('/api/jurnal-detail/' + this.perusahaan.id + '/' + jurnal.id + '/' + this.random() )
+                axios.get('/api/jurnal-detail/' + this.perusahaan.id + '/' + jurnal.id + '/' + this.random() )
                         .then(response => {
                             this.showForm.details = response.data;
                             
