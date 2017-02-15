@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Asset;
 use App\Http\Requests;
+use Carbon\Carbon;
+use Cache;
 use Gate;
-use DB;
 
 class AssetController extends Controller
 {
@@ -26,7 +27,11 @@ class AssetController extends Controller
             abort(404);
         }
 
-        $hasil = Asset::where('perusahaan_id', $comp)->get();
+        $minutes = Carbon::now()->addDays(10);
+
+        $hasil = Cache::remember('getAsset_' . $comp, $minutes, function() use ($comp){
+            return Asset::where('perusahaan_id', $comp)->get();    
+        });         
 
         return $hasil;
     }
